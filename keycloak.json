@@ -1,0 +1,10 @@
+{
+"relm": "yijia",
+  "auth-server-url": "https://k.op.yijiacare.com/auth/",
+  "ssl-required": "external",
+  "resource": "nexus",
+  "credentials": {
+    "secret": "604b04a7-feb6-4d31-a39f-e15fcb93a9b5"
+  },
+  "confidential-port": 0
+}
