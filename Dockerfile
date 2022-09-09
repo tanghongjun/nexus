@@ -74,8 +74,8 @@ RUN echo "#!/bin/bash" >> ${SONATYPE_DIR}/start-nexus-repository-manager.sh \
    && echo "exec ./bin/nexus run" >> ${SONATYPE_DIR}/start-nexus-repository-manager.sh \
    && chmod a+x ${SONATYPE_DIR}/start-nexus-repository-manager.sh
    
-COPY ./nexus3-keycloak-plugin-0.5.0.jar  /opt/sonatype/nexus/system/
-COPY ./keycloak.json  /opt/sonatype/nexus/etc/
+COPY  nexus3-keycloak-plugin-0.5.0.jar  ./system/
+COPY  keycloak.json   ./etc/
 
 RUN microdnf remove -y tar gzip shadow-utils
 
