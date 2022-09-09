@@ -57,9 +57,7 @@ RUN microdnf update -y \
     && useradd --uid 200 -r nexus -g nexus -s /bin/false -d /opt/sonatype/nexus -c 'Nexus Repository Manager user'
 
 WORKDIR ${SONATYPE_DIR}
-# add by tanghongjun
-COPY ./nexus3-keycloak-plugin-0.5.0.jar  /opt/sonatype/nexus/system/
-COPY ./keycloak.json  /opt/sonatype/nexus/etc/
+
 # Download nexus & setup directories
 RUN curl -L ${NEXUS_DOWNLOAD_URL} --output nexus-${NEXUS_VERSION}-unix.tar.gz \
     && echo "${NEXUS_DOWNLOAD_SHA256_HASH} nexus-${NEXUS_VERSION}-unix.tar.gz" > nexus-${NEXUS_VERSION}-unix.tar.gz.sha256 \
@@ -75,6 +73,9 @@ RUN echo "#!/bin/bash" >> ${SONATYPE_DIR}/start-nexus-repository-manager.sh \
    && echo "cd /opt/sonatype/nexus" >> ${SONATYPE_DIR}/start-nexus-repository-manager.sh \
    && echo "exec ./bin/nexus run" >> ${SONATYPE_DIR}/start-nexus-repository-manager.sh \
    && chmod a+x ${SONATYPE_DIR}/start-nexus-repository-manager.sh
+   
+COPY ./nexus3-keycloak-plugin-0.5.0.jar  /opt/sonatype/nexus/system/
+COPY ./keycloak.json  /opt/sonatype/nexus/etc/
 
 RUN microdnf remove -y tar gzip shadow-utils
 
